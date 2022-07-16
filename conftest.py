@@ -5,13 +5,6 @@ from selenium.webdriver.firefox.options import Options as firefox_options
 
 
 @pytest.fixture
-def firefox_options(firefox_options):
-    firefox_options.set_headless(True)
-    firefox_options.add_argument('--headless')
-    return firefox_options
-
-
-@pytest.fixture
 def driver_friends(request):
     drifriend = webdriver.Firefox()
     drifriend.get('https://petfriends.skillfactory.ru/login')
