@@ -6,11 +6,9 @@ from selenium.webdriver.chrome.options import Options as chrome_options
 
 
 @pytest.fixture
-def set_headless(self, headless=True):
-    # warnings.warn('use setter for headless property instead of set_headless',
-    #               DeprecationWarning, stacklevel=2)
-    self.headless = headless
-    return headless
+def set_headless():
+    firefox_options.add_argument('--headless')
+    return firefox_options
 
 
 @pytest.fixture
