@@ -7,9 +7,13 @@ from selenium.webdriver.support import expected_conditions as EC
 def test_my_pets_info(driver_friends_chrome):
     driver_friends_chrome.implicitly_wait(10)
     driver_friends_chrome.find_element_by_xpath('//body/nav/div[1]/ul/li[1]/a').click()
+    # element = WebDriverWait(driver_friends_chrome, 10).until(
+    #     EC.text_to_be_present_in_element((By.TAG_NAME, "h1"), "PetFriends"))
+    # WebDriverWait(driver_friends_chrome, 10).until\
+    #     (EC.presence_of_element_located((By.CLASS_NAME, ".col-sm-4 left")))
     assert driver_friends_chrome.find_element_by_xpath('//body/div[1]/div/div[1]/h2').text == "AnnaCherdan"
 
-    pets = 'Питомцев: 5'
+    pets = 'Питомцев: 6'
     pets_text = driver_friends_chrome.find_element_by_xpath('//body/div[1]/div[1]/div[1]')
     assert pets in pets_text.text
 
@@ -22,13 +26,22 @@ def test_my_pets_info(driver_friends_chrome):
     table_pet = driver_friends_chrome.find_elements_by_xpath('//*[@id="all_my_pets"]/table')
     for i in range(len(string)):
         assert names[i].text and animal_type[i].text and age[i].text != ''
-        # assert images[i].get_attribute('src') != '', 'WARNING, no IMG'
-        count_img = img
-        if images[i].get_attribute('src') != '':
-            img = len(images)
-        count_img = img
         count_nam = len(names)
-        assert img == count_nam
+        count_type = len(animal_type)
+        count_age = len(age)
+        assert count_type == count_nam
+        assert count_nam == count_age
+
+    for t in range(len(table_pet)):
+        # # count_img = driver_friends_chrome.find_elements_by_link_text('data:image')
+        # count_img = 0
+        # if images[t].get_attribute('src'):
+        #     count_img += 1
+        # count_img_t = len(count_img)
+        count_nam = len(names)
+        count_type = len(animal_type)
+        count_age = len(age)
+        assert count_type == count_nam == count_age
 
 
 
@@ -36,9 +49,6 @@ def test_my_pets_info(driver_friends_chrome):
 
 
 
-
-    # for string in range(len(table_pet)):
-    #     assert string == images
 
 
 
